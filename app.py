@@ -97,7 +97,10 @@ def add_user():
     photo = request.files['photo']
 
     with Image.open(photo) as image:
-        base_width = 1000
+        if image.size[0] <= 2000:
+            base_width = 250
+        else:
+            base_width = 500
         w_percent = (base_width / float(image.size[0]))
         h_size = int((float(image.size[1]) * float(w_percent)))
         p = image.resize((base_width, h_size), Image.ANTIALIAS)
