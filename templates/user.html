@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="user">
+        <div class="row justify-content-center align-items-center">
+            <div class="col col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-info" role="alert">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <div class="profile">
+                    <img src="{{ url_for('static', filename='uploads/' + user.file_name ) }}"
+                         class="rounded mx-auto d-block img-responsive img-thumbnail" alt="photo">
+                    <p class="center">
+                        {{ user.last_name }}, {{ user.first_name }} <br>
+                        {{ user.email }} <br>
+                        {{ user.phone_number }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

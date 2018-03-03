@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="login">
+        <div class="row justify-content-center align-items-center">
+            <div class="col col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form method="post" action="{{ url_for('user') }}">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp"
+                               placeholder="Enter email" required="required">
+                        {#<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.
+                        </small>#}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                               placeholder="Password" required="required">
+                    </div>
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Submit</button>
+                </form>
+                <div class="center">
+                    <a href="{{ url_for('register_view') }}">Don't have an account? Click here</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

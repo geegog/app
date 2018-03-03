@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="register">
+        <div class="row justify-content-center align-items-center">
+            <div class="col col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <h2>Please enter your details</h2>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form action="{{ url_for('add_user') }}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first_name" class="form-control" id="first-name"
+                               aria-describedby="firstHelp"
+                               placeholder="Enter first name" required="required">
+                        <small id="firstHelp" class="form-text text-muted">Enter your <strong>first</strong> name.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" id="last-name"
+                               aria-describedby="lastHelp"
+                               placeholder="Enter last name" required="required">
+                        <small id="lastHelp" class="form-text text-muted">Enter your <strong>last</strong> name.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-number">Phone</label>
+                        <input type="text" name="phone_number" class="form-control" id="phone-number"
+                               aria-describedby="phoneHelp"
+                               placeholder="Enter phone number" required="required">
+                        <small id="phoneHelp" class="form-text text-muted">Enter your phone number.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp"
+                               placeholder="Enter email" required="required">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                               ria-describedby="passHelp"
+                               placeholder="Password" required="required">
+                        <small id="passHelp" class="form-text text-muted">We'll never share your password with anyone
+                            else.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Photo</label>
+                        <input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1"
+                               required="required">
+                    </div>
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Submit</button>
+                </form>
+                <div class="center">
+                    <a href="{{ url_for('login') }}">Have an account? Click here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+.login {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 20px 20px;
+}
+
+.center {
+    text-align: center;
+    font-size: 3.0vh;
+}
+
+.register {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 20px 20px;
+}
+
+.user {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 20px 20px 20px;
+}
