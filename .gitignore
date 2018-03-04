@@ -1,0 +1,15 @@
+venv
+.pytest_cache
+.env
+.coverage
+.idea
+__pycache__
+
+*/__pycache__
+*.pyc
+*.db
+*.coverage
+.DS_Store
+env.sh
+migrations
+htmlcov
