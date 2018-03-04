@@ -1,7 +1,9 @@
 import os
 import sqlite3
+import traceback
 
-from PIL import Image
+import sys
+from PIL import Image, ExifTags
 from flask import Flask, redirect, flash, request, render_template, url_for, g, session
 from resizeimage import resizeimage
 from werkzeug.utils import secure_filename
@@ -103,8 +105,27 @@ def add_user():
             base_width = 500
         w_percent = (base_width / float(image.size[0]))
         h_size = int((float(image.size[1]) * float(w_percent)))
-        p = image.resize((base_width, h_size), Image.ANTIALIAS)
-        p.save(app.config['PHOTOS'] + secure_filename(photo.filename), image.format)
+
+        if hasattr(image, '_getexif'):  # only present in JPEGs
+            try:
+                for orientation in ExifTags.TAGS.keys():
+                    if ExifTags.TAGS[orientation] == 'Orientation':
+                        break
+                e = image._getexif()  # returns None if no EXIF data
+                if e is not None:
+                    exif = dict(e.items())
+                    orientation = exif[orientation]
+
+                    if orientation == 3:
+                        image = image.transpose(Image.ROTATE_180)
+                    elif orientation == 6:
+                        image = image.transpose(Image.ROTATE_270)
+                    elif orientation == 8:
+                        image = image.transpose(Image.ROTATE_90)
+            except:
+                traceback.print_exc(file=sys.stdout)
+        image.thumbnail((base_width, h_size), Image.ANTIALIAS)
+        image.save(app.config['PHOTOS'] + secure_filename(photo.filename), image.format)
     try:
         db = get_db()
         db.execute('INSERT INTO users (first_name, last_name, email, password, phone_number, file_name)'
