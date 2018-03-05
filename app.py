@@ -1,12 +1,13 @@
 import os
 import sqlite3
-import traceback
 
 import sys
+import traceback
+
 from PIL import Image, ExifTags
-from flask import Flask, redirect, flash, request, render_template, url_for, g, session
-from resizeimage import resizeimage
+from flask import Flask, url_for, redirect, flash, session, render_template, request, app, g
 from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
